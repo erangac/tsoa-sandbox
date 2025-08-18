@@ -1,69 +1,31 @@
 {
-  "name": "TSOA-Node-Express",
+  "name": "tsoa-sandbox",
   "version": "1.0.0",
-  "description": "TSOA-NodeExpress Documentation",
-  "main": "index.js",
-  "engines": {
-    "node": "8.9.3",
-    "npm": "5.5.1"
-  },
+  "description": "A sandbox for testing TSOA",
+  "main": "dist/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start-basic": "tsc && nodemon ./build/index.js",
-    "routes-gen": "tsoa routes -c custom-tsoa.json",
-    "swagger-gen": "tsoa swagger -c custom-tsoa.json",
-    "clean": "rimraf ./build && rimraf ./src/routes.ts && rimraf ./src/swagger.json",
-    "tsoa-gen": "npm run routes-gen && npm run swagger-gen",
-    "swagger-copy": "cp ./src/swagger.json ./build/swagger.json",
-    "start-gen-dev": "npm run start-gen && nodemon ./build/index.js",
-    "start-gen": "npm run clean && npm run tsoa-gen && tsc && npm run swagger-copy",
-    "clean-swagger": "rimraf ./angular-src/src/app/swagger-api",
-    "swagger-client": "npm run clean-swagger && swagger-codegen generate -i http://localhost:8080/api/docs/swagger.json -o ./angular-src/src/app/swagger-api -l typescript-angular -c ./swagger-config.json",
-    "heroku-prebuild": "export NPM_CONFIG_PRODUCTION=false; export NODE_ENV=; NPM_CONFIG_PRODUCTION=false NODE_ENV=development npm install --only=dev --dev",
-    "heroku-postbuild": "export NPM_CONFIG_PRODUCTION=true; export NODE_ENV=production; cd ./angular-src/ && npm install",
-    "start": "tsc && cp ./src/newrelic.js ./build/newrelic.js && cp ./src/swagger.json ./build/swagger.json && node ./build/index.js",
-    "start-prod": "npm run clean && cd ./angular-src/ && ng build --prod && cd .. && npm run start-gen"
+    "build": "tsoa spec && tsoa routes && tsc",
+    "dev": "nodemon",
+    "start": "node dist/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "TSOA",
-    "TypeScript",
-    "Swagger",
-    "Node",
-    "Express"
+    "tsoa",
+    "typescript",
+    "express",
+    "swagger"
   ],
-  "author": "Chau Tran",
-  "license": "MIT",
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.2",
-    "config": "^1.29.0",
-    "cors": "^2.8.4",
-    "express": "^4.16.2",
-    "express-winston": "^2.4.0",
-    "js-yaml": "^3.10.0",
-    "jsonwebtoken": "^8.1.0",
-    "moment": "^2.20.1",
-    "mongoose": "^5.0.1",
-    "morgan": "^1.9.0",
-    "newrelic": "^2.6.0",
-    "passport": "^0.4.0",
-    "passport-jwt": "^3.0.1",
-    "request": "^2.83.0",
-    "swagger-ui-express": "^2.0.13",
-    "tsoa": "git+https://nartc@github.com/nartc/tsoa.git",
-    "winston": "^2.4.0"
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.30",
+    "express": "^4.19.2",
+    "swagger-ui-express": "^5.0.0",
+    "tsoa": "^5.2.2"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.1",
-    "@types/express": "^4.11.0",
-    "@types/jsonwebtoken": "^7.2.5",
-    "@types/mongoose": "^4.7.32",
-    "@types/node": "^8.5.7",
-    "@types/passport": "^0.4.2",
-    "@types/passport-jwt": "^3.0.0",
-    "@types/winston": "^2.3.7",
-    "copyfiles": "^1.2.0",
-    "tslint": "^5.8.0",
-    "typescript": "^2.6.2"
+    "nodemon": "^3.1.0",
+    "typescript": "^5.4.3"
   }
 }
